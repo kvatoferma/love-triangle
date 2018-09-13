@@ -4,18 +4,87 @@
  */
 // module.exports =
 // function getLoveTrianglesCount(preferences = [2,3,1]) {
-(function getLoveTrianglesCount(people = [2,3,1]) {
-  const personFactory = function (name, loves) {
+(function getLoveTrianglesCount(people = [2, 3, 1, 5, 6, 4]) {
+  const personFactory = (name, loves) => {
     return {
       name: name,
       loves: loves,
     }
   }
 
-people = [2,3,1]
+  const triangleFactory = (persons) => {
+    return {
+      persons: persons,
+      getId: () => {
+        persons.map((person) => {
+          return person.name;
+        });
+      }
+    }
+  }
 
-name: index
-loves: people[index]
+
+
+  let triangle1 = [
+    {name: 1, loves: 2},
+    {name: 2, loves: 3},
+    {name: 3, loves: 1}
+  ]
+
+  let triangle2 = [
+    {name: 4, loves: 5},
+    {name: 5, loves: 6},
+    {name: 6, loves: 4}
+  ]
+
+  let triangle3 = [
+    {name: 2, loves: 3},
+    {name: 3, loves: 1},
+    {name: 1, loves: 2}
+  ]
+
+  const compareTriangles = (target1, target2) => {
+    return JSON.stringify(target1.getId()) == JSON.stringify(target2.getId()) || false;
+  }
+
+  const triangleFactory = (persons) => {
+    return {
+      persons: persons,
+      getId: () => {
+        return persons.map((person) => person.name).sort();
+      }
+    }
+  }
+
+  const obj1 = triangleFactory(triangle1);
+  const obj2 = triangleFactory(triangle2);
+  const obj3 = triangleFactory(triangle3);
+  console.log('getId obj1 ', obj1.getId());
+  console.log('getId obj2 ', obj2.getId());
+  console.log('getId obj3 ', obj3.getId());
+  console.log('compare different self ', compareTriangles(obj1, obj1));
+  console.log('compare different obj ', compareTriangles(obj1, obj2));
+  console.log('compare disordered same obj ', compareTriangles(obj1, obj3));
+
+
+  const getId = (triangle) => {
+    let triangleId = triangle.map((element) => {
+      return element.name;
+    });
+    return triangleId;
+  }
+  console.log(getId(triangle));
+
+    // const getTriangleId = (triangle) => {
+    //   return {
+    //
+    //   }
+    // }
+
+
+
+
+
 
 //*****************************
 // [null, 2, 3, 1]
@@ -24,7 +93,7 @@ loves: people[index]
     people.unshift(null);
 // 3) Получаем ссылку на любимого:
     // people.forEach((element, i) => {
-      for (var i = 1; i <= array.length; i++) {
+      for (var i = 1; i <= people.length; i++) {
         let love = people[i]; // => 2
         let loveOfLove = people[love]; // => 3
 // 5) Сравниваем значения:
@@ -34,14 +103,21 @@ loves: people[index]
             personFactory(love, people[love]),
             personFactory(loveOfLove, people[loveOfLove])
           ];
+          triangles.push(triangle);
         }
+
+
+
+
+
+
 // 8) Если данного треугольника нету в массиве, кладем его туда:
 
 // Сравнение объектов:
 // JSON.stringify(obj1) === JSON.stringify(obj2);
 
 
-        if (!triangles.includes(triangle)) { triangles.push(triangle) }
+        // if (!triangles.includes(triangle)) { triangles.push(triangle) }
 
 
 // 9) Повторяем для каждого элемента people[i] пока не переберём весь массив people:
@@ -94,7 +170,7 @@ loves: people[index]
 
 
 
-  console.log(people);
+  console.log(triangles);
 
 })();
 
