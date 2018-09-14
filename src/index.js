@@ -5,7 +5,7 @@
 module.exports = function getLoveTrianglesCount(preferences = []) {
   const people = preferences;
   let ids = [];
-    people.unshift(null);
+  people.unshift(null);
     for (var i = 1; i <= people.length; i++) {
       let love = people[i];
       let loveOfLove = people[love];
